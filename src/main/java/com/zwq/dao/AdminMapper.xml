@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zwq.dao.AdminMapper">
+    <insert id="addAnnounce">
+        insert into bbs.announcement(content) values (#{textContent})
+    </insert>
+    <select id="getAdmin" resultType="admin">
+        select * from bbs.admin where username = #{username} and password = #{password}
+    </select>
+    <select id="getAnnounceByStatus" resultType="announcement">
+        select * from bbs.announcement where status = 1
+    </select>
+    <select id="queryAllUserByPage" resultType="user">
+        select *
+        from bbs.user
+    </select>
+    <update id="userOpen" parameterType="int">
+        update bbs.user set status = 1 where id = #{userId}
+    </update>
+    <update id="userClose" parameterType="int">
+        update bbs.user set status = 0 where id = #{userId}
+    </update>
+    <delete id="userDelete" parameterType="int">
+        delete from bbs.user where id = #{userId}
+    </delete>
+    <update id="postOpen" parameterType="int">
+        update bbs.post set status = 1 where post_id = #{postId}
+    </update>
+    <update id="postClose" parameterType="int">
+        update bbs.post set status = 0 where post_id = #{postId}
+    </update>
+    <update id="updateAnnounce" parameterType="announcement">
+        update bbs.announcement set create_time = #{create_time} , content = #{content} where id = #{id}
+
+    </update>
+    <delete id="postDelete" parameterType="int">
+        delete from bbs.post where post_id = #{postId}
+    </delete>
+    <delete id="deleteUser_PostByPostId" parameterType="int">
+        delete from bbs.user_post where post_id = #{postId}
+    </delete>
+</mapper>

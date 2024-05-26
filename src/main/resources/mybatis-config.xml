@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+       PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+       "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <typeAliases>
+        <package name="com.zwq.pojo"/>
+    </typeAliases>
+
+<!--    <plugins>-->
+<!--        &lt;!&ndash;配置分页插件&ndash;&gt;-->
+<!--        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>-->
+<!--    </plugins>-->
+
+    <mappers>
+        <mapper class="com.zwq.dao.UserMapper"/>
+    </mappers>
+
+
+
+
+</configuration>
+

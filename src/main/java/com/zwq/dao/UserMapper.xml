@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zwq.dao.UserMapper">
+
+    <select id="getUserByLogin" resultType="com.zwq.pojo.User">
+        select * from bbs.user where email = #{email} and password = #{password}
+    </select>
+
+    <select id="userRegisterByEmail" resultType="com.zwq.pojo.User">
+        select * from bbs.user where email  = #{email}
+    </select>
+
+    <select id="userRegisterByName" resultType="com.zwq.pojo.User">
+        select * from bbs.user where username  = #{username}
+    </select>
+    <select id="getconcernedIdList" resultType="java.lang.Integer">
+        select concerned_id from bbs.user_user where fans_id = #{userId}
+    </select>
+    <select id="getFansIdList" resultType="java.lang.Integer">
+        select fans_id from bbs.user_user where concerned_id = #{userId}
+    </select>
+    <select id="existUser_User" resultType="com.zwq.pojo.User_User">
+        select * from bbs.user_user where fans_id = #{fansId} and concerned_id = #{userId}
+    </select>
+    <select id="getUSerByCondition" resultType="com.zwq.pojo.User">
+        select * from bbs.user where username like #{username} and status = #{status}
+    </select>
+    <select id="getUSerByPageName" resultType="user">
+        select * from bbs.user where username like #{flag}
+    </select>
+
+    <insert id="addUser" parameterType="com.zwq.pojo.User">
+        insert into bbs.user(email,username,password)values (#{email},#{username},#{password})
+    </insert>
+    <insert id="addUser_User">
+        insert into bbs.user_user(fans_id, concerned_id) VALUES (#{fansId}, #{userId})
+    </insert>
+
+    <update id="updateUser" parameterType="user">
+        update bbs.user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="username != null">username = #{username},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="company != null">company = #{company},</if>
+            <if test="introduction != null">introduction = #{introduction},</if>
+            <if test="img != null">img = #{img},</if>
+            <if test="password != null">password = #{password},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="destruction" parameterType="user">
+        delete from bbs.user where id = #{id}
+    </delete>
+    <delete id="deleteUser_User">
+        delete from bbs.user_user where fans_id = #{fansId} and concerned_id = #{userId}
+    </delete>
+    <insert id="addComment" parameterType="comment">
+        insert into bbs.comment(commenter_id, post_id, comment_content) VALUES (#{commenter_id},#{post_id},#{comment_content})
+    </insert>
+</mapper>

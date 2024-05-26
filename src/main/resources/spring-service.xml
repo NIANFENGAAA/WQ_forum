@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.zwq.service"/>
+
+    <bean id="UserServiceImpl" class="com.zwq.service.impl.UserServiceImpl">
+        <property name="userMapper" ref="userMapper"/>
+    </bean>
+
+    <bean id="PostCategoryServiceImpl" class="com.zwq.service.impl.PostCategoryServiceImpl">
+        <property name="postCategoryMapper" ref="postCategoryMapper"/>
+    </bean>
+
+    <bean id="PostServiceImpl" class="com.zwq.service.impl.PostServiceImpl">
+        <property name="postMapper" ref="postMapper"/>
+    </bean>
+
+    <bean id="AdminServiceImpl" class="com.zwq.service.impl.AdminServiceImpl">
+        <property name="adminMapper" ref="adminMapper"/>
+    </bean>
+
+    <bean id="CommentServiceImpl" class="com.zwq.service.impl.CommentServiceImpl">
+        <property name="commentMapper" ref="commentMapper"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!--注入数据源-->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+
+
+</beans>

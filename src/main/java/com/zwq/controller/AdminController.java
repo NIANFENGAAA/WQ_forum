@@ -1,16 +1,13 @@
 package com.zwq.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.zwq.pojo.Admin;
-import com.zwq.pojo.Announcement;
-import com.zwq.pojo.Post;
-import com.zwq.pojo.User;
+import com.zwq.pojo.*;
 import com.zwq.result.Result;
 import com.zwq.service.AdminService;
 import com.zwq.service.PostCategoryService;
 import com.zwq.service.PostService;
 import com.zwq.service.UserService;
-import com.zwq.utils.TimeToBeijing;
+import com.zwq.vo.ReportVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -56,6 +54,10 @@ public class AdminController {
     //跳转文章管理页面
     @RequestMapping("/admin/goAdminPost")
     public String goAdminPost(){return "adminPost";}
+
+    //跳转评论举报页面
+    @RequestMapping("/admin/goAdminReport")
+    public String goAdminReport(){return "adminReport";}
 
     //管理员登录
     @RequestMapping("admin/login")
@@ -211,6 +213,54 @@ public class AdminController {
 
         session.removeAttribute("presentAnnounce");
         session.setAttribute("presentAnnounce",presentAnnounce);
+        return Result.success();
+    }
+
+    //管理员分页获得所有被举报的评论
+    @GetMapping("admin/getAllComment")
+    public String getAllComment(@RequestParam("currentPage") int currentPage,
+                                HttpSession session){
+        log.info("管理员分页获得所有被举报的评论");
+
+        if (session.getAttribute("reportVoPageInfo") != null){
+            session.removeAttribute("reportVoPageInfo");
+        }
+        if (session.getAttribute("reportVoList") != null){
+            session.removeAttribute("reportVoList");
+        }
+
+        PageInfo<Report> reportVoPageInfo = adminService.getAllCommentByPage(currentPage, 6);
+        List<ReportVo> reportVoList = new ArrayList<>();
+        for (Report report : reportVoPageInfo.getList()) {
+            ReportVo reportVo = new ReportVo();
+            Comment comment = adminService.getCommentById(report.getComment_id());
+            reportVo.setReport(report);
+            reportVo.setComment(comment);
+            reportVoList.add(reportVo);
+        }
+        session.setAttribute("reportVoList",reportVoList);
+        session.setAttribute("reportVoPageInfo",reportVoPageInfo);
+        return "adminReport";
+    }
+
+    //举报的评论被驳回，举报不成立，将被举报的评论从report删除
+    @GetMapping("admin/deleteReport")
+    public Result deleteReport(@RequestParam("reportId") int reportId){
+        log.info("驳回被举报的评论......");
+        adminService.deleteReportById(reportId);
+        return Result.success();
+    }
+
+    //被举报的评论成立
+    @GetMapping("admin/successReport")
+    public Result successReport(@RequestParam("commentId") int commentId){
+        //删除与该评论有关的外键
+        //删除report表中有关数据
+        adminService.deleteReportByCommentId(commentId);
+        //删除comment-user表中有关数据
+        adminService.deleteComment_userByCommentId(commentId);
+        //最后删除comment表中有关数据
+        adminService.deleteCommentByCommentId(commentId);
         return Result.success();
     }
 

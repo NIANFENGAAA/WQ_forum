@@ -1,9 +1,8 @@
 package com.zwq.service;
 
 import com.github.pagehelper.PageInfo;
-import com.zwq.pojo.Admin;
-import com.zwq.pojo.Announcement;
-import com.zwq.pojo.User;
+import com.zwq.pojo.*;
+import com.zwq.vo.ReportVo;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,4 +33,17 @@ public interface AdminService {
 
     //管理员更新网站公告
     void updateAnnounce(Announcement newAnnounce);
+
+    PageInfo<Report> getAllCommentByPage(Integer currentPage, Integer pageSize);
+    Comment getCommentById(int commentId);
+
+    //将被举报的评论从report删除
+    void deleteReportById(int reportId);
+
+    void deleteReportByCommentId(int commentId);
+
+    void deleteComment_userByCommentId(int commentId);
+
+    void deleteCommentByCommentId(int commentId);
+
 }

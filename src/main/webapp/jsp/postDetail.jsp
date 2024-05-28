@@ -527,51 +527,8 @@
                         </c:if>
 
                         <el-divider direction="vertical"></el-divider>
-                        <span style="margin: 0; font-size: 10px;"><el-link @click="reportFormVisible = true">举报</el-link></span>
+                        <span style="margin: 0; font-size: 10px;"><el-link onclick="window.location.href = '${pageContext.request.contextPath}/goCommentReport?commentId=${comment.comment.comment_id}' ">举报</el-link></span>
 
-                        <el-dialog title="举报" :visible.sync="reportFormVisible">
-                            <el-form :model="form">
-                                <h3>请选择投诉原因：</h3>
-                                <br>
-                                <div>
-                                    <h3>内容违规</h3>
-
-                                    <el-radio-group v-model="radio1" style="margin-left: 50px">
-                                        <el-radio :label="1">色情低俗</el-radio>
-                                        <el-radio :label="2">营销广告</el-radio>
-                                        <el-radio :label="3">信息诈骗</el-radio>
-                                        <el-radio :label="4">政治敏感</el-radio>
-                                    </el-radio-group>
-
-                                    <h3>缺乏友善</h3>
-
-                                    <el-radio-group v-model="radio2" style="margin-left: 50px">
-                                        <el-radio :label="1">性别对立</el-radio>
-                                        <el-radio :label="2">恶意诋毁</el-radio>
-                                        <el-radio :label="3">引战、制造冲突</el-radio>
-                                        <el-radio :label="4">人身攻击</el-radio>
-                                    </el-radio-group>
-
-                                    <h3>侵犯权益</h3>
-                                    <el-radio-group v-model="radio3" style="margin-left: 50px">
-                                        <el-radio :label="1">侵犯名誉/隐私/著作/肖像权等</el-radio>
-                                    </el-radio-group>
-
-                                    <h3>其他原因</h3>
-                                    <el-radio-group v-model="radio4" style="margin-left: 50px">
-                                        <el-radio :label="1">其他原因</el-radio>
-                                        <el-radio :label="2">恶意诋毁</el-radio>
-                                        <el-radio :label="3">引战、制造冲突</el-radio>
-                                        <el-radio :label="4">人身攻击</el-radio>
-                                    </el-radio-group>
-
-                                </div>
-                            </el-form>
-                            <div slot="footer" class="dialog-footer">
-                                <el-button @click="reportFormVisible = false">取 消</el-button>
-                                <el-button type="primary" @click="reportFormVisible = false; TestAlert()">确 定</el-button>
-                            </div>
-                        </el-dialog>
                     </div>
                 </div>
             </c:forEach>
@@ -586,27 +543,13 @@
 
 </body>
 <script>
+    // import alert from "../element-ui/packages/alert";
+
     new Vue({
         el:"#app",
         data:{
             input: '',
             commentContent: '',
-            reportFormVisible: false,
-            form: {
-                name: '',
-                region: '',
-                date1: '',
-                date2: '',
-                delivery: false,
-                type: [],
-                resource: '',
-                desc: ''
-            },
-            formLabelWidth: '120px',
-            radio1:'',
-            radio2:'',
-            radio3:'',
-            radio4:'',
         },
         methods: {
             cancelFollow(userId){
@@ -652,9 +595,6 @@
                     message: '大胆，还敢取消！',
                     type: 'success'
                 });
-            },
-            TestAlert(){
-                alert(this.radio1);
             },
             sendComment(){
                 axios.get('${pageContext.request.contextPath}/user/addComment',{

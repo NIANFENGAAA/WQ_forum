@@ -3,11 +3,11 @@ package com.zwq.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zwq.dao.AdminMapper;
-import com.zwq.pojo.Admin;
-import com.zwq.pojo.Announcement;
-import com.zwq.pojo.User;
+import com.zwq.pojo.*;
 import com.zwq.service.AdminService;
+import com.zwq.vo.ReportVo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdminServiceImpl implements AdminService {
@@ -75,5 +75,38 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void updateAnnounce(Announcement newAnnounce) {
         adminMapper.updateAnnounce(newAnnounce);
+    }
+
+    @Override
+    public PageInfo<Report> getAllCommentByPage(Integer currentPage, Integer pageSize) {
+        PageHelper.startPage(currentPage,pageSize);
+        List<Report> reportList =  adminMapper.getAllCommentByPage();
+        PageInfo<Report> pageInfo = new PageInfo<Report>(reportList);
+        return pageInfo;
+    }
+
+    @Override
+    public Comment getCommentById(int commentId) {
+        return adminMapper.getCommentById(commentId);
+    }
+
+    @Override
+    public void deleteReportById(int reportId) {
+        adminMapper.deleteReportById(reportId);
+    }
+
+    @Override
+    public void deleteReportByCommentId(int commentId) {
+        adminMapper.deleteReportByCommentId(commentId);
+    }
+
+    @Override
+    public void deleteComment_userByCommentId(int commentId) {
+        adminMapper.deleteComment_userByCommentId(commentId);
+    }
+
+    @Override
+    public void deleteCommentByCommentId(int commentId) {
+        adminMapper.deleteCommentByCommentId(commentId);
     }
 }

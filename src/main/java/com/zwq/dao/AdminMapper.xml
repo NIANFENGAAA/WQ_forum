@@ -41,4 +41,22 @@
     <delete id="deleteUser_PostByPostId" parameterType="int">
         delete from bbs.user_post where post_id = #{postId}
     </delete>
+    <select id="getAllCommentByPage" resultType="report">
+        select * from bbs.report
+    </select>
+    <select id="getCommentById" resultType="comment">
+        select * from bbs.comment where comment_id = #{commentId}
+    </select>
+    <delete id="deleteReportById" parameterType="int">
+        delete from bbs.report where report_id = #{reportId}
+    </delete>
+    <delete id="deleteReportByCommentId">
+        delete from bbs.report where comment_id = #{commentId}
+    </delete>
+    <delete id="deleteComment_userByCommentId">
+        delete from bbs.comment_user where comment_id = #{commentId}
+    </delete>
+    <delete id="deleteCommentByCommentId">
+        delete from bbs.comment where comment_id = #{commentId}
+    </delete>
 </mapper>

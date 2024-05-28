@@ -1,6 +1,7 @@
 package com.zwq.service.impl;
 
 import com.zwq.dao.CommentMapper;
+import com.zwq.pojo.Report;
 import com.zwq.service.CommentService;
 
 public class CommentServiceImpl implements CommentService {
@@ -28,5 +29,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void deleteCommentGood(int commentId) {
         commentMapper.deleteCommentGood(commentId);
+    }
+
+    @Override
+    public void insertToReport(Report report) {
+        commentMapper.insertToReport(report);
     }
 }

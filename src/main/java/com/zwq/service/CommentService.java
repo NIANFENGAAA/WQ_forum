@@ -1,5 +1,6 @@
 package com.zwq.service;
 
+import com.zwq.pojo.Report;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,4 +17,7 @@ public interface CommentService {
 
     //将comment表中的点赞数量减一
     void deleteCommentGood(int commentId);
+
+    //将举报的实体类插入report表中
+    void insertToReport(Report report);
 }

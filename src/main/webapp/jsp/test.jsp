@@ -28,7 +28,7 @@
 
 <script>
 
-    const axios = require('axios')
+    const axios = require('axios');
 
     new Vue({
         el: '#app',

@@ -1,5 +1,6 @@
 package com.zwq.dao;
 
+import com.zwq.pojo.Report;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,4 +14,6 @@ public interface CommentMapper {
     void deleteComment_user(@Param("userId") int userId, @Param("commentId")int commentId);
 
     void deleteCommentGood(int commentId);
+
+    void insertToReport(Report report);
 }

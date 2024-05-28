@@ -55,12 +55,12 @@
     }
 
     .main-user {
-        /*border: 1px solid rgb(10, 10, 10);*/
+        /*border: 1px solid rgb(192, 6, 6);*/
         float: left;
         margin-top: 10px;
-        margin-left: 300px;
+        margin-left: 150px;
         height: 600px;
-        width: 950px;
+        width: 1200px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
         background: white;
         border-radius: 5px;
@@ -72,7 +72,7 @@
         margin-top: 0;
         margin-left: 0;
         height: 60px;
-        width: 950px;
+        width: 1200px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
     }
 
@@ -83,7 +83,7 @@
         margin-left: 0;
         margin-bottom: 3px;
         height: 84px;
-        width: 950px;
+        width: 1200px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
     }
 
@@ -91,50 +91,6 @@
         background: #f2f3f5;
     }
 
-    .main-user-header-username-content {
-        /*border: 1px solid rgb(10, 10, 10);*/
-        float: left;
-        margin-top: 0;
-        margin-left: 0;
-        height: 84px;
-        width: 150px;
-    }
-
-    .main-user-header-email-content {
-        /*border: 1px solid rgb(10, 10, 10);*/
-        float: left;
-        margin-top: 0;
-        margin-left: 50px;
-        height: 84px;
-        width: 200px;
-    }
-
-    .main-user-header-status-content {
-        /*border: 1px solid rgb(10, 10, 10);*/
-        float: left;
-        margin-top: 0;
-        margin-left: 50px;
-        height: 84px;
-        width: 150px;
-    }
-
-    .main-user-header-operation-content {
-        /*border: 1px solid rgb(10, 10, 10);*/
-        float: left;
-        margin-top: 0;
-        margin-left: 50px;
-        height: 84px;
-        width: 280px;
-    }
-
-    .main-user-header-operation-content-button {
-        /*border: 1px solid rgb(10, 10, 10);*/
-        float: left;
-        margin-top: 24px;
-        margin-left: 10px;
-        height: 40px;
-        width: 80px;
-    }
 
     .main-user-header-username {
         /*border: 1px solid rgb(10, 10, 10);*/
@@ -142,34 +98,82 @@
         margin-top: 0;
         margin-left: 0;
         height: 60px;
-        width: 150px;
+        width: 200px;
+    }
+    .main-user-header-username-child {
+        /*border: 1px solid rgb(10, 10, 10);*/
+        float: left;
+        margin-top: 0;
+        margin-left: 0;
+        height: 84px;
+        width: 200px;
     }
 
     .main-user-header-email {
         /*border: 1px solid rgb(10, 10, 10);*/
         float: left;
         margin-top: 0;
-        margin-left: 50px;
+        margin-left: 30px;
         height: 60px;
-        width: 200px;
+        width: 140px;
+    }
+    .main-user-header-email-child {
+        /*border: 1px solid rgb(10, 10, 10);*/
+        float: left;
+        margin-top: 0;
+        margin-left: 30px;
+        height: 84px;
+        width: 140px;
     }
 
     .main-user-header-status {
         /*border: 1px solid rgb(10, 10, 10);*/
         float: left;
         margin-top: 0;
-        margin-left: 50px;
+        margin-left: 30px;
         height: 60px;
-        width: 150px;
+        width: 140px;
+    }
+    .main-user-header-status-child {
+        /*border: 1px solid rgb(10, 10, 10);*/
+        float: left;
+        margin-top: 0;
+        margin-left: 30px;
+        height: 84px;
+        width: 140px;
     }
 
     .main-user-header-operation {
         /*border: 1px solid rgb(10, 10, 10);*/
         float: left;
         margin-top: 0;
-        margin-left: 50px;
+        margin-left: 30px;
         height: 60px;
-        width: 250px;
+        width: 170px;
+    }
+    .main-user-header-operation-child {
+        /*border: 1px solid rgb(10, 10, 10);*/
+        float: left;
+        margin-top: 0;
+        margin-left: 30px;
+        height: 84px;
+        width: 170px;
+    }
+    .main-user-header-operation-new{
+        /*border: 1px solid rgb(10, 10, 10);*/
+        float: left;
+        margin-top: 0;
+        margin-left: 20px;
+        height: 60px;
+        width: 220px;
+    }
+    .main-user-header-operation-new-child{
+        /*border: 1px solid rgb(10, 10, 10);*/
+        float: left;
+        margin-top: 0;
+        margin-left: 20px;
+        height: 84px;
+        width: 220px;
     }
     .main-user-bottom {
         /*border: 1px solid rgb(10, 10, 10);*/
@@ -179,40 +183,6 @@
         margin-left: 520px;
         height: 60px;
         width: 500px;
-    }
-    .main-condition{
-        /*border: 1px solid rgb(10, 10, 10);*/
-        float: left;
-        /*position:absolute;*/
-
-        margin-top: 20px;
-        margin-left: 400px;
-        height: 60px;
-        width: 720px;
-    }
-    .main-condition-demo1{
-        /*border: 1px solid rgb(10, 10, 10);*/
-        float: left;
-        margin-top: 0px;
-        margin-left: 20px;
-        height: 60px;
-        width: 100px;
-    }
-    .main-condition-demo1-input{
-        /*border: 1px solid rgb(10, 10, 10);*/
-        float: left;
-        margin-top: 20px;
-        margin-left: 10px;
-        height: 40px;
-        width: 160px;
-    }
-    .main-condition-demo1-button{
-        /*border: 1px solid rgb(10, 10, 10);*/
-        float: left;
-        margin-top: 20px;
-        margin-left: 10px;
-        height: 40px;
-        width: 100px;
     }
 
 </style>
@@ -237,7 +207,7 @@
                             <span slot="title">管理</span>
                         </template>
                         <el-menu-item-group>
-                            <el-menu-item index="1-1">用户管理</el-menu-item>
+                            <el-menu-item index="1-1" @click="goAdminIndex()">用户管理</el-menu-item>
                             <el-menu-item index="1-2" @click="goAdminPost()">文章管理</el-menu-item>
                             <el-menu-item index="1-2">日志管理</el-menu-item>
                         </el-menu-item-group>
@@ -263,9 +233,9 @@
                         </div>
                     </el-dialog>
 
-                    <el-menu-item index="3" onclick="window.location.href= '${pageContext.request.contextPath}/admin/getAllComment?currentPage=1' ">
+                    <el-menu-item index="3">
                         <i class="el-icon-warning"></i>
-                        <span slot="title">举报处理</span>
+                        <span slot="title" onclick="window.location.href= '${pageContext.request.contextPath}/admin/getAllComment?currentPage=1';">举报处理</span>
                     </el-menu-item>
 
                     <el-menu-item index="4" @click="adminQuit()">
@@ -278,85 +248,93 @@
 
             <el-main>
 
-                <form method="get" action="${pageContext.request.contextPath}/admin/getUserByUS'" id="click">
-                    <div class="main-condition">
-                        <div class="main-condition-demo1">
-                            用户名称：
-                        </div>
-                        <div class="main-condition-demo1-input">
-                            <el-input v-model="username" placeholder="请输入用户名" name="username"></el-input>
-                        </div>
-                        <div class="main-condition-demo1">
-                            用户状态：
-                        </div>
-                        <div class="main-condition-demo1-input">
-                            <template>
-                                <el-select v-model="optionValue" placeholder="请选择" name="optionValue">
-
-                                    <el-option
-                                            label="启用"
-                                            value="1">
-                                    </el-option>
-                                    <el-option
-                                            label="禁用"
-                                            value="0">
-                                    </el-option>
-                                    <el-option
-                                            label="全部"
-                                            value="-1">
-                                    </el-option>
-                                </el-select>
-                            </template>
-                        </div>
-
-                        <div class="main-condition-demo1-button">
-                                <el-button type="primary" icon="el-icon-search" @click="onSubmit()">查询</el-button>
-                        </div>
-
-                    </div>
-                </form>
-
 
                 <div class="main-user">
                     <div class="main-user-header">
                         <div class="main-user-header-username">
-                            用户名称
+                            被举报评论
                         </div>
                         <div class="main-user-header-email">
-                            邮箱
+                            内容违规
                         </div>
                         <div class="main-user-header-status">
-                            用户状态
+                            缺乏友善
                         </div>
                         <div class="main-user-header-operation">
+                            侵犯权益
+                        </div>
+                        <div class="main-user-header-operation">
+                            其他原因
+                        </div>
+                        <div class="main-user-header-operation-new">
                             操作
                         </div>
                     </div>
 
                     <%--每一页只能放六个--%>
-                    <c:forEach items="${sessionScope.pageInfo.list}" var="user">
-
+                    <c:forEach items="${sessionScope.reportVoList}" var="reportVo">
                     <div class="main-user-header-content">
-                        <div class="main-user-header-username-content">
-                            ${user.username}
+                        <div class="main-user-header-username-child">
+                            <p style="margin: 0; font-size: 10px; line-height: 12px">
+                                ${reportVo.comment.comment_content}
+                            </p>
                         </div>
-                        <div class="main-user-header-email-content">
-                                ${user.email}
+                        <div class="main-user-header-email-child">
+                            <c:if test="${reportVo.report.content_violation == 0}">
+                                暂无
+                            </c:if>
+                            <c:if test="${reportVo.report.content_violation == 1}">
+                                色情低俗
+                            </c:if>
+                            <c:if test="${reportVo.report.content_violation == 2}">
+                                营销广告
+                            </c:if>
+                            <c:if test="${reportVo.report.content_violation == 3}">
+                                信息诈骗
+                            </c:if>
+                            <c:if test="${reportVo.report.content_violation == 4}">
+                                政治敏感
+                            </c:if>
                         </div>
-                        <div class="main-user-header-status-content">
-                            <c:if test="${user.status == 1}">启用</c:if>
-                            <c:if test="${user.status == 0}">禁用</c:if>
+                        <div class="main-user-header-status-child">
+                            <c:if test="${reportVo.report.lack_friendliness == 0}">
+                                暂无
+                            </c:if>
+                            <c:if test="${reportVo.report.lack_friendliness == 1}">
+                                性别对立
+                            </c:if>
+                            <c:if test="${reportVo.report.lack_friendliness == 2}">
+                                恶意诋毁
+                            </c:if>
+                            <c:if test="${reportVo.report.lack_friendliness == 3}">
+                                引战冲突
+                            </c:if>
+                            <c:if test="${reportVo.report.lack_friendliness == 4}">
+                                人身攻击
+                            </c:if>
                         </div>
-                        <div class="main-user-header-operation-content">
-                            <div class="main-user-header-operation-content-button">
-                                <el-button type="primary" @click="userOpen(${user.id}); successButton()">启用</el-button>
-                            </div>
-                            <div class="main-user-header-operation-content-button">
-                                <el-button type="warning" @click="userClose(${user.id}); successButton()">禁用</el-button>
-                            </div>
-                            <div class="main-user-header-operation-content-button">
-                                <el-button type="danger" @click="userDelete(${user.id}); successButton()">删除</el-button>
-                            </div>
+                        <div class="main-user-header-operation-child">
+                            <c:if test="${reportVo.report.violate_equity == 0}">
+                                暂无
+                            </c:if>
+                            <c:if test="${reportVo.report.violate_equity == 1}">
+                                侵犯名誉/隐私/著作/肖像权等
+                            </c:if>
+                        </div>
+                        <div class="main-user-header-operation-child">
+                            <c:if test="${reportVo.report.other_reasons == 0}">
+                                暂无
+                            </c:if>
+                            <c:if test="${reportVo.report.other_reasons == 1}">
+                                <p style="margin: 0; font-size: 10px; line-height: 12px">
+                                        ${reportVo.report.text}
+                                </p>
+                            </c:if>
+
+                        </div>
+                        <div class="main-user-header-operation-new-child">
+                            <el-button type="primary" @click="successReport(${reportVo.report.comment_id}); successButton()">通过</el-button>
+                            <el-button type="warning" @click="refuseReport(${reportVo.report.report_id}); successButton();">驳回</el-button>
                         </div>
                     </div>
                     </c:forEach>
@@ -364,13 +342,13 @@
 
                 </div>
 
-                <div class="main-user-bottom">
-                    <c:forEach begin="1" end="${sessionScope.pageInfo.pages}" step="1" var="currentPage">
-                        第<a href="">${currentPage}</a>页
-                    </c:forEach>
-                    当前页：${sessionScope.pageInfo.pageNum}
-                    总记录数：${sessionScope.pageInfo.total}
-                    总页数：${sessionScope.pageInfo.pages}
+                <div class="main-user-bottom">第
+                    <c:forEach begin="1" end="${sessionScope.reportVoPageInfo.pages}" step="1" var="currentPage">
+                        <a href="${pageContext.request.contextPath}/admin/getAllComment?currentPage=${currentPage}">${currentPage}</a>
+                    </c:forEach>页
+                    当前页：${sessionScope.reportVoPageInfo.pageNum}
+                    总记录数：${sessionScope.reportVoPageInfo.total}
+                    总页数：${sessionScope.reportVoPageInfo.pages}
                 </div>
 
 
@@ -414,52 +392,18 @@
                     window.location.href="${pageContext.request.contextPath}/admin/goAdminPost";
                 })
             },
-            goAdminReport(currentPage){
-                axios.get('${pageContext.request.contextPath}admin/getAllComment',{
-                    params:{
-                        currentPage:currentPage,
-                    }
-                }).then(function (suc) {
-                    window.location.href="${pageContext.request.contextPath}/admin/goAdminReport";
-                })
-            },
-            onSubmit(){
+            goAdminIndex(){
                 axios.get('${pageContext.request.contextPath}/admin/getUserByUS',{
                     params:{
-                        username:this.username,
-                        optionValue:this.optionValue,
+                        input:'',
+                        optionValue:-1,
                     }
                 }).then(function (suc) {
-                    alert("查询成功！")
-                    window.location.href="${pageContext.request.contextPath}/goAdminIndex"
-                })
-            },
-            userOpen(userId){
-                axios.get('${pageContext.request.contextPath}/admin/userOpen',{
-                    params:{
-                        userId:userId,
-                    }
-                }).then(function (suc) {
-                })
-            },
-            userClose(userId){
-                axios.get('${pageContext.request.contextPath}/admin/userClose',{
-                    params:{
-                        userId:userId,
-                    }
-                }).then(function (suc) {
-                })
-            },
-            userDelete(userId){
-                axios.get('${pageContext.request.contextPath}/admin/userDelete',{
-                    params:{
-                        userId:userId,
-                    }
-                }).then(function (suc) {
+                    window.location.href="${pageContext.request.contextPath}/goAdminIndex";
                 })
             },
             adminQuit(){
-              window.location.href="${pageContext.request.contextPath}/goRegister"
+                window.location.href="${pageContext.request.contextPath}/goRegister"
             },
             updateAnnounce(){
                 axios.get('${pageContext.request.contextPath}/admin/updateAnnounce',{
@@ -474,6 +418,22 @@
                     type: 'success'
                 });
             },
+            refuseReport(reportId){
+                axios.get('${pageContext.request.contextPath}/admin/deleteReport',{
+                    params:{
+                        reportId:reportId,
+                    }
+                }).then(function (suc) {
+
+                })
+            },
+            successReport(commentId){
+                axios.get('${pageContext.request.contextPath}/admin/successReport',{
+                    params:{
+                        commentId:commentId,
+                    }
+                })
+            }
         },
 
 

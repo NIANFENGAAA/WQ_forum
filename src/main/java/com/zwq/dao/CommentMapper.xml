@@ -16,4 +16,8 @@
     <update id="deleteCommentGood">
         update bbs.comment set comment_good = comment_good - 1 where comment_id = #{commentId}
     </update>
+    <insert id="insertToReport" parameterType="report">
+        insert into bbs.report(content_violation, lack_friendliness, violate_equity, other_reasons, comment_id,text)
+        VALUES(#{content_violation}, #{lack_friendliness}, #{violate_equity}, #{other_reasons}, #{comment_id},#{text})
+    </insert>
 </mapper>

@@ -263,9 +263,9 @@
                         </div>
                     </el-dialog>
 
-                    <el-menu-item index="3">
+                    <el-menu-item index="3" @click="goAdminReport()">
                         <i class="el-icon-warning"></i>
-                        <span slot="title">举报处理</span>
+                        <span slot="title" onclick="window.location.href= '${pageContext.request.contextPath}/admin/getAllComment?currentPage=1' ">举报处理</span>
                     </el-menu-item>
 
                     <el-menu-item index="4" @click="adminQuit()">
@@ -424,6 +424,9 @@
                 }).then(function (suc) {
                     window.location.href="${pageContext.request.contextPath}/goAdminIndex";
                 })
+            },
+            goAdminReport(){
+                axios.get('${pageContext.request.contextPath}/admin/goAdminReport')
             },
             postOpen(postId){
                 axios.get('${pageContext.request.contextPath}/admin/postOpen',{

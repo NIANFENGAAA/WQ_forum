@@ -1,8 +1,6 @@
 package com.zwq.dao;
 
-import com.zwq.pojo.Admin;
-import com.zwq.pojo.Announcement;
-import com.zwq.pojo.User;
+import com.zwq.pojo.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -32,4 +30,16 @@ public interface AdminMapper {
     Announcement getAnnounceByStatus();
 
     void updateAnnounce(Announcement newAnnounce);
+
+    List<Report> getAllCommentByPage();
+
+    Comment getCommentById(int commentId);
+
+    void deleteReportById(int reportId);
+
+    void deleteReportByCommentId(int commentId);
+
+    void deleteComment_userByCommentId(int commentId);
+
+    void deleteCommentByCommentId(int commentId);
 }

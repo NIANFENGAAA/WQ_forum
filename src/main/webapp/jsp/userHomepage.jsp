@@ -461,6 +461,39 @@
                             </c:forEach>
                         </c:if>
                     </el-tab-pane>
+
+
+
+
+                    <el-tab-pane label="我的收藏" name="five">
+                        <c:if test="${empty sessionScope.HomePage.starPostList}">
+                            <el-empty image="${pageContext.request.contextPath}/avatar/waiting.jpg"></el-empty>
+                        </c:if>
+
+                        <c:if test="${!empty sessionScope.HomePage.starPostList}">
+                        <c:forEach items="${sessionScope.HomePage.starPostList}" var="post">
+                        <div class="homePage-main-child">
+                            <div class="homePage-main-middle-child-up" onclick="window.location.href = '${pageContext.request.contextPath}/goPostDetail?postId=${post.post_id}'">
+                                <p style="font-weight: bold;padding: 0;margin-top: 0;margin-bottom: 0">${post.post_title}</p>
+                            </div>
+                            <div class="homePage-main-middle-child-middle" onclick="window.location.href = '${pageContext.request.contextPath}/goPostDetail?postId=${post.post_id}'">
+                                <p style="margin: 0; font-family: '13px Small',serif; font-size: smaller">${post.post_content}</p>
+                            </div>
+                            <div class="homePage-main-middle-child-down">
+                                <span style="font-size: smaller">${post.userName}</span>
+                                <el-divider direction="vertical"></el-divider>
+                                <i class="el-icon-view homePage-set-icon"></i>
+                                <span style="font-size: smaller">${post.view}</span>
+                                <el-divider direction="vertical"></el-divider>
+                                <i class="el-icon-thumb homePage-set-icon"></i>
+                                <span style="font-size: smaller">${post.goodQuantity}</span>
+                            </div>
+                        </div>
+                        </c:forEach>
+                        </c:if>
+                    </el-tab-pane>
+
+
                 </el-tabs>
             </div>
         </div>

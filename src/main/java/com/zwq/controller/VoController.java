@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
@@ -125,6 +126,180 @@ public class VoController {
         return "index";
     }
 
+    //根据文章分类查询
+    @RequestMapping("getPostByPostCategoryId")
+    public String getPostByPostCategoryId(int post_category_id,HttpSession session){
+        log.info("根据文章分类查询,文章种类id为：{}",post_category_id);
+
+        //获得所有符合条件的已经被审核通过的文章，并且进行处理作为首页数据展示
+        log.info("获得所有已经被审核通过的文章......");
+        List<Post> allPostByStatus = postService.getPostByPostCategoryId(post_category_id);
+        log.info("查询到的文章数量为：{}", allPostByStatus.size());
+
+        User presentUser = (User) session.getAttribute("presentUser");
+
+        List<IndexPost> indexPostList = new ArrayList<>();
+
+        for (Post post : allPostByStatus) {
+            IndexPost indexPost = new IndexPost();
+
+            indexPost.setPost_id(post.getPost_id());
+            indexPost.setPost_title(post.getPost_title());
+            //对文章内容展示进行处理
+            HtmlToText htmlToText = new HtmlToText();
+            String text = htmlToText.toText(post.getPost_content());
+            String s = text.substring(0, Math.min(60, text.length())) + "...";
+
+            indexPost.setPost_content(s);
+
+            indexPost.setUserName(userService.getUserById(post.getUser_id()).getUsername());
+            indexPost.setView(post.getView_volume());
+            //设置点赞数量
+            int goodQuality = postService.getGoodQuality(post.getPost_id());
+            indexPost.setGoodQuantity(goodQuality);
+
+
+            //设置点赞状态
+            if (presentUser != null) {
+                //用户已经登录
+                //设置点赞状态
+                //根据文章id和当前用户id判断两者的关系是否已经存在user_post表中
+                if (postService.isNull(post.getPost_id(), presentUser.getId()) == null) {
+                    //不存在
+                    //将该关系插入表中,改在点赞时插入
+                    /*postService.addUser_Post(post.getPost_id(), presentUser.getId());*/
+                    indexPost.setGood(false);
+                }
+
+                User_Post userPost = postService.getGoodStatus(post.getPost_id(), presentUser.getId());
+
+                if (userPost == null)
+                    indexPost.setGood(false);
+
+                if (userPost != null && userPost.getGood() == 1) {
+                    //已点赞
+                    indexPost.setGood(true);
+                }else {
+                    //未点赞
+                    indexPost.setGood(false);
+                }
+            } else {
+                ///用户尚未登录
+                indexPost.setGood(false);
+            }
+
+            //设置文章观看数量
+            indexPost.setView(postService.getPostById(post.getPost_id()).getView_volume());
+
+            //加入集合中
+            indexPostList.add(indexPost);
+
+//            //网站公告预加载
+//            //找到一个状态为1的公告
+//            Announcement presentAnnounce = adminService.getAnnounceByStatus();
+//            //设置当前需要展示的公告
+//            session.setAttribute("presentAnnounce",presentAnnounce);
+        }
+
+        log.info("首页需要展示的文章集合数量为：{}", indexPostList.size());
+        if (session.getAttribute("indexPostList") != null){
+            session.removeAttribute("indexPostList");
+        }
+        session.setAttribute("indexPostList", indexPostList);
+
+        return "index";
+    }
+
+    //用户根据关键词搜索
+    @GetMapping("getPostByKeyword")
+    public String getPostByKeyword(String keyword,HttpSession session){
+        log.info("用户根据关键词搜索,关键词为：{}",keyword);
+        if (keyword == null || keyword.isEmpty()){
+            keyword = "%%";
+        }else {
+            keyword = "%" + keyword + "%";
+        }
+
+        //获得所有符合条件的已经被审核通过的文章，并且进行处理作为首页数据展示
+        log.info("获得所有已经被审核通过的文章......");
+        List<Post> allPostByStatus = postService.getPostByKeyword(keyword);
+        log.info("查询到的文章数量为：{}", allPostByStatus.size());
+
+        User presentUser = (User) session.getAttribute("presentUser");
+
+        List<IndexPost> indexPostList = new ArrayList<>();
+
+        for (Post post : allPostByStatus) {
+            IndexPost indexPost = new IndexPost();
+
+            indexPost.setPost_id(post.getPost_id());
+            indexPost.setPost_title(post.getPost_title());
+            //对文章内容展示进行处理
+            HtmlToText htmlToText = new HtmlToText();
+            String text = htmlToText.toText(post.getPost_content());
+            String s = text.substring(0, Math.min(60, text.length())) + "...";
+
+            indexPost.setPost_content(s);
+
+            indexPost.setUserName(userService.getUserById(post.getUser_id()).getUsername());
+            indexPost.setView(post.getView_volume());
+            //设置点赞数量
+            int goodQuality = postService.getGoodQuality(post.getPost_id());
+            indexPost.setGoodQuantity(goodQuality);
+
+
+            //设置点赞状态
+            if (presentUser != null) {
+                //用户已经登录
+                //设置点赞状态
+                //根据文章id和当前用户id判断两者的关系是否已经存在user_post表中
+                if (postService.isNull(post.getPost_id(), presentUser.getId()) == null) {
+                    //不存在
+                    //将该关系插入表中,改在点赞时插入
+                    /*postService.addUser_Post(post.getPost_id(), presentUser.getId());*/
+                    indexPost.setGood(false);
+                }
+
+                User_Post userPost = postService.getGoodStatus(post.getPost_id(), presentUser.getId());
+
+                if (userPost == null)
+                    indexPost.setGood(false);
+
+                if (userPost != null && userPost.getGood() == 1) {
+                    //已点赞
+                    indexPost.setGood(true);
+                }else {
+                    //未点赞
+                    indexPost.setGood(false);
+                }
+            } else {
+                ///用户尚未登录
+                indexPost.setGood(false);
+            }
+
+            //设置文章观看数量
+            indexPost.setView(postService.getPostById(post.getPost_id()).getView_volume());
+
+            //加入集合中
+            indexPostList.add(indexPost);
+
+//            //网站公告预加载
+//            //找到一个状态为1的公告
+//            Announcement presentAnnounce = adminService.getAnnounceByStatus();
+//            //设置当前需要展示的公告
+//            session.setAttribute("presentAnnounce",presentAnnounce);
+        }
+
+        log.info("首页需要展示的文章集合数量为：{}", indexPostList.size());
+        if (session.getAttribute("indexPostList") != null){
+            session.removeAttribute("indexPostList");
+        }
+        session.setAttribute("indexPostList", indexPostList);
+
+        return "index";
+
+    }
+
 
     //跳转到个人主页
     @RequestMapping("goUserHomepage")
@@ -225,6 +400,43 @@ public class VoController {
         //根据当前用户id拿到该用户
         User user = userService.getUserById(userId);
         homePage.setUser(user);
+
+        //获得用户所有的收藏的文章
+        //根据当前用户id拿到所有收藏的文章id
+        List<Integer> starIdList = postService.getStarPostId(userId);
+        List<Post> starPostList = new ArrayList<>();
+        for (Integer postId : starIdList) {
+            //根据文章id拿到所有文章
+            Post post = postService.getPostById(postId);
+            starPostList.add(post);
+        }
+
+        //对获得的文章集合进行加工然后在前端展示
+        List<IndexPost> newStarPost = new ArrayList<>();
+
+        for (Post post : starPostList) {
+            IndexPost indexPost = new IndexPost();
+            indexPost.setPost_id(post.getPost_id());
+            indexPost.setPost_title(post.getPost_title());
+            //对文章内容展示进行处理
+            HtmlToText htmlToText = new HtmlToText();
+            String text = htmlToText.toText(post.getPost_content());
+            String s = text.substring(0, Math.min(60, text.length())) + "...";
+
+            indexPost.setPost_content(s);
+
+            indexPost.setUserName(userService.getUserById(post.getUser_id()).getUsername());
+            indexPost.setView(post.getView_volume());
+            //设置点赞数量
+            int goodQuality = postService.getGoodQuality(post.getPost_id());
+            indexPost.setGoodQuantity(goodQuality);
+            //自己的文章不准点赞，未点赞
+            indexPost.setGood(false);
+
+            newStarPost.add(indexPost);
+        }
+        homePage.setStarPostList(newStarPost);
+
 
         session.setAttribute("HomePage", homePage);
 

@@ -124,4 +124,19 @@ public class PostServiceImpl implements PostService {
     public void addStarById(int userId, int postId) {
         postMapper.addStarById(userId,postId);
     }
+
+    @Override
+    public List<Post> getPostByPostCategoryId(int postCategoryId) {
+        return postMapper.getPostByPostCategoryId(postCategoryId);
+    }
+
+    @Override
+    public List<Post> getPostByKeyword(String keyword) {
+        return postMapper.getPostByKeyword(keyword);
+    }
+
+    @Override
+    public List<Integer> getStarPostId(int userId) {
+        return postMapper.getStarPostId(userId);
+    }
 }

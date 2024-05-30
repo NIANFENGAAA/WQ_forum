@@ -67,4 +67,13 @@ public interface PostService {
 
     //将收藏状态设为1
     void addStarById(int userId, int postId);
+
+    //根据文章分类查询
+    List<Post> getPostByPostCategoryId(int postCategoryId);
+
+    //用户根据关键词搜索
+    List<Post> getPostByKeyword(String keyword);
+
+    //根据当前用户id拿到所有收藏的文章id
+    List<Integer> getStarPostId(int userId);
 }

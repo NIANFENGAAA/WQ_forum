@@ -232,10 +232,10 @@
         </div>
 
         <div class="suosou">
-            <el-input v-model="input" placeholder="请输入内容"></el-input>
+            <el-input v-model="input" placeholder="请输入关键词"></el-input>
         </div>
         <div class="sousuo-submit">
-            <el-button type="primary" icon="el-icon-search">搜索</el-button>
+            <el-button type="primary" icon="el-icon-search" @click="getPostByKeyword()">搜索</el-button>
         </div>
 
         <div class="user-detail">
@@ -284,7 +284,7 @@
                             @open="handleOpen"
                             >
                         <c:forEach items="${sessionScope.allPostCategory}" var="postCategory">
-                            <el-menu-item index="1">
+                            <el-menu-item index="1" onclick="window.location.href='${pageContext.request.contextPath}/getPostByPostCategoryId?post_category_id=${postCategory.post_category_id}'">
                                 <i class="el-icon-discover"></i>
                                 <span slot="title">${postCategory.post_category}</span>
                             </el-menu-item>
@@ -296,6 +296,11 @@
         </div>
 
         <div class="main-middle">
+
+            <c:if test="${empty sessionScope.indexPostList}">
+                <el-empty :image-size="200" image="${pageContext.request.contextPath}/imgs/waiting.jpg"></el-empty>
+            </c:if>
+
             <c:forEach items="${sessionScope.indexPostList}" var="post" >
             <div class="main-middle-child">
 
@@ -315,7 +320,12 @@
                             <el-button type="text" @click="addGood(${post.post_id}, ${post.good}); open1()"><i class="el-icon-thumb set-icon-gooded"></i></el-button>
                         </c:if>
                         <c:if test="${post.good == false}">
-                            <el-button type="text" @click="addGood(${post.post_id}, ${post.good}); open2()"><i class="el-icon-thumb set-icon"></i></el-button>
+                            <c:if test="${!empty sessionScope.presentUser}">
+                                <el-button type="text" @click="addGood(${post.post_id}, ${post.good}); open2()"><i class="el-icon-thumb set-icon"></i></el-button>
+                            </c:if>
+                            <c:if test="${empty sessionScope.presentUser}">
+                                <el-button type="text" @click="open3()"><i class="el-icon-thumb set-icon"></i></el-button>
+                            </c:if>
                         </c:if>
                         <span style="font-size: smaller">${post.goodQuantity}</span>
 <%--                        <input v-model="postId" value="${post.post_id}" type="hidden" >--%>
@@ -363,7 +373,7 @@
                         window.history.go(0);
                     }
                 }).catch(function (err) {
-                    alert(err)
+                    alert(err.data.msg)
                 })
             },
             open2() {
@@ -378,6 +388,15 @@
                     type: 'success'
                 });
             },
+            open3() {
+                this.$message({
+                    message: '请先登录',
+                    type: 'success'
+                });
+            },
+            getPostByKeyword(){
+                window.location.href='${pageContext.request.contextPath}/getPostByKeyword?keyword='+this.input
+            }
         },
 
     })

@@ -71,6 +71,15 @@
     <update id="addStarById">
         update bbs.user_post set star = 1 where user_id = #{userId} and post_id = #{postId}
     </update>
+    <select id="getPostByPostCategoryId" resultType="post">
+        select * from bbs.post where post_category_id = #{postCategoryId}
+    </select>
+    <select id="getPostByKeyword" resultType="post">
+        select * from bbs.post where post_title like #{keyword}
+    </select>
+    <select id="getStarPostId" resultType="int">
+        select post_id from bbs.user_post where user_id = #{userId} and star = 1
+    </select>
 
 
 </mapper>

@@ -21,6 +21,8 @@ public class HomePage {
     private List<IndexPost> goodPostList;
     //粉丝列表
     private List<User> fansList;
+    //收藏的文章
+    private List<IndexPost> starPostList;
     //当前主页用户信息
     private User user;
 

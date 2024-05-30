@@ -393,6 +393,7 @@
     <div class="post-main-box">
 
         <div class="post-main-left">
+            <c:if test="${!empty sessionScope.presentUser}">
             <div class="post-main-left-child">
                 <el-button type="primary" icon="el-icon-top" circle
                            @click="buttonSuccess(); updateGood(${sessionScope.presentPost.post_id},${sessionScope.presentPost.good_status})"></el-button>
@@ -404,9 +405,22 @@
                 <el-button type="warning" icon="el-icon-star-off" circle
                            @click="buttonSuccess(); updateStar(${sessionScope.presentPost.post_id},${sessionScope.presentPost.star_status})"></el-button>
             </div>
-<%--            <div class="post-main-left-child">--%>
-<%--                <el-button type="danger" icon="el-icon-warning" circle></el-button>--%>
-<%--            </div>--%>
+            </c:if>
+
+            <c:if test="${empty sessionScope.presentUser}">
+                <div class="post-main-left-child">
+                    <el-button type="primary" icon="el-icon-top" circle
+                               @click="open3();"></el-button>
+                </div>
+                <div class="post-main-left-child">
+                    <el-button type="success" icon="el-icon-chat-round" circle></el-button>
+                </div>
+                <div class="post-main-left-child">
+                    <el-button type="warning" icon="el-icon-star-off" circle
+                               @click="open3();"></el-button>
+                </div>
+            </c:if>
+
         </div>
 
         <div class="post-main-middle">
@@ -454,7 +468,12 @@
             <div class="post-main-right-down">
                 <div class="post-main-right-down-demo1">
                     <c:if test="${sessionScope.presentPost.fans_status == false}">
+                        <c:if test="${!empty sessionScope.presentUser}">
                         <el-button type="primary" size="medium" class="user-button" @click="addFollow(${sessionScope.presentPost.user.id}); open2()">关注</el-button>
+                        </c:if>
+                        <c:if test="${empty sessionScope.presentUser}">
+                            <el-button type="primary" size="medium" class="user-button" @click="open3()">关注</el-button>
+                        </c:if>
                     </c:if>
                     <c:if test="${sessionScope.presentPost.fans_status == true}">
                         <el-button type="primary" plain size="medium" class="user-button" @click="cancelFollow(${sessionScope.presentPost.user.id}); open1()">已关注</el-button>
@@ -491,7 +510,12 @@
                     </el-input>
 
                     <div class="post-main-footer-comment-add-content-button">
+                        <c:if test="${!empty sessionScope.presentUser}">
                         <el-button type="primary" class="add-content-button-size" @click="sendComment(); buttonSuccess()">发送</el-button>
+                        </c:if>
+                        <c:if test="${empty sessionScope.presentUser}">
+                            <el-button type="primary" class="add-content-button-size" @click="open3()">发送</el-button>
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -522,13 +546,22 @@
                             <span style="margin: 0; font-size: 10px;"><el-link @click="buttonSuccess(); deleteGoodComment(${comment.comment.comment_id});"><i class="el-icon-thumb" style="color: red"></i>${comment.comment.comment_good}</el-link></span>
                         </c:if>
                         <c:if test="${comment.goodStatus == false}">
-                            <%--已点赞--%>
-                            <span style="margin: 0; font-size: 10px;"><el-link @click="buttonSuccess(); addGoodComment(${comment.comment.comment_id});"><i class="el-icon-thumb"></i>${comment.comment.comment_good}</el-link></span>
+                            <%--未点赞--%>
+                            <c:if test="${!empty sessionScope.presentUser}">
+                                <span style="margin: 0; font-size: 10px;"><el-link @click="buttonSuccess(); addGoodComment(${comment.comment.comment_id});"><i class="el-icon-thumb"></i>${comment.comment.comment_good}</el-link></span>
+                            </c:if>
+                            <c:if test="${empty sessionScope.presentUser}">
+                                <span style="margin: 0; font-size: 10px;"><el-link @click="open3();"><i class="el-icon-thumb"></i>${comment.comment.comment_good}</el-link></span>
+                            </c:if>
                         </c:if>
 
                         <el-divider direction="vertical"></el-divider>
+                        <c:if test="${!empty sessionScope.presentUser}">
                         <span style="margin: 0; font-size: 10px;"><el-link onclick="window.location.href = '${pageContext.request.contextPath}/goCommentReport?commentId=${comment.comment.comment_id}' ">举报</el-link></span>
-
+                        </c:if>
+                        <c:if test="${empty sessionScope.presentUser}">
+                            <span style="margin: 0; font-size: 10px;"><el-link @click="open3()">举报</el-link></span>
+                        </c:if>
                     </div>
                 </div>
             </c:forEach>
@@ -561,8 +594,6 @@
                     if (suc.data.code === 1){
                         window.history.go(0);
                     }
-                }).catch(function (err) {
-                    alert(err)
                 })
             },
             addFollow(userId){
@@ -574,8 +605,6 @@
                     if (suc.data.code === 1){
                         window.history.go(0);
                     }
-                }).catch(function (err) {
-                    alert(err)
                 })
             },
             open2() {
@@ -596,6 +625,12 @@
                     type: 'success'
                 });
             },
+            open3() {
+                this.$message({
+                    message: '请先登录',
+                    type: 'success'
+                });
+            },
             sendComment(){
                 axios.get('${pageContext.request.contextPath}/user/addComment',{
                     params:{
@@ -605,6 +640,9 @@
                 }).then(function (suc) {
                     if (suc.data.code === 1){
                         window.history.go(0);
+                    }
+                    if (suc.data.code === 0){
+                        alert(suc.data.msg);
                     }
                 })
             },

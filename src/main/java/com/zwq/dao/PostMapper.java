@@ -51,4 +51,10 @@ public interface PostMapper {
     void deleteStar(@Param("userId")int userId, @Param("postId")int postId);
 
     void addStarById(@Param("userId")int userId, @Param("postId")int postId);
+
+    List<Post> getPostByPostCategoryId(int postCategoryId);
+
+    List<Post> getPostByKeyword(String keyword);
+
+    List<Integer> getStarPostId(int userId);
 }
